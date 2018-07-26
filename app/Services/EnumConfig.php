@@ -5,8 +5,6 @@ use Mockery\Exception;
 
 class EnumConfig {
 
-
-
     public $params = [
         'gender' => [
             'Male'   => '男性',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Services\EnumConfig;
 use App\Services\QiNiuApi;
 use App\Services\ThirdFaceApi;
@@ -29,6 +30,7 @@ class uploadController extends Controller
     const  BASE_URL  = 'http://ohsllkayi.bkt.clouddn.com';                     //外链默认域名（对象存储->内容管理）
     const  PIC_PREFIX = 'face_';
 
+    //人脸识别配置
     const FACE_API_KEY    = "20DkOt0-yR8QIvVvD0LksMeeA_kBh34Q";                //调用此API的API Key
     const FACE_API_SECRET = "ztlVtEkalxsnHU051MYpyqaTfQsm4n1j";                //调用此API的API Secret
 
@@ -57,6 +59,29 @@ class uploadController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function picList()
+    {
+        $prams = [
+            'lists' => Image::getAll()
+        ];
+        return view('show-page',$prams);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $params = [
+            'detail' => Image::getDetail($id)
+        ];
+        return view('pic-detail',$params);
+    }
+
+    /**
      * - 执行验证
      * @throws \CException
      * @throws \Exception
@@ -70,6 +95,10 @@ class uploadController extends Controller
         //结果处理
         //文档地址：https://console.faceplusplus.com.cn/documents/4888383
         $faces = json_decode($result)->faces;
+        if(empty($faces) || !$faces){
+            echo "请上传人物图片！";
+            exit;
+        }
         $age ='';
         $ethnicity ='';
         $sex ='';
@@ -303,6 +332,14 @@ class uploadController extends Controller
 
         $html .= "</div>";
        echo $html;
+
+        if($picPath){
+            $insertRe = Image::insertImage(['src' => $picPath,'description' => $html]);
+            if(!$insertRe){
+                echo "数据储存失败";
+                exit;
+            }
+        }
 
     }
 

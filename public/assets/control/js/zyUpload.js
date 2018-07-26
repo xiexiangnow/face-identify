@@ -69,6 +69,8 @@
 		            html += '				<div class="btns">';
 		            html += '					<div class="webuploader_pick">继续选择</div>';
 		            html += '					<div class="upload_btn">开始验证</div>';
+                    html += '					<a href="/lists"><div class="upload_face">人脸列表</div></a>';
+
 		            html += '				</div>';
 		            html += '			</div>';
 					html += '			<div id="preview" class="upload_preview"></div>';

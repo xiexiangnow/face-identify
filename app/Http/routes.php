@@ -11,9 +11,19 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'UploadController@index');
 
-
-Route::get('upload','UploadController@index');
-
+//上传执行地址
 Route::any('uploadPic','UploadController@upload');
+
+//人脸列表
+Route::get('lists','UploadController@picList');
+
+//详情
+Route::get('detail','UploadController@detail');
+
+
+Route::resource('upload','UploadController',['only' => ['index','show']]);

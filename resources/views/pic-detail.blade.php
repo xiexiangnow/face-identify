@@ -11,6 +11,7 @@
         height: auto;
         border: 1px #00a2d2 dashed;
         padding: 20px;
+        margin: 30px 20px;
     }
     .container a {
         text-decoration: none;

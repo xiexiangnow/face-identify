@@ -27,3 +27,8 @@ Route::get('detail','UploadController@detail');
 
 
 Route::resource('upload','UploadController',['only' => ['index','show']]);
+
+
+
+//支付测试
+Route::get('payTest','AlipayController@payTest');

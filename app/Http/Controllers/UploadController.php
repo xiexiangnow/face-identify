@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\alipay\pagepay\service\AlipayTradeService;
 use App\Models\Image;
 use App\Services\EnumConfig;
 use App\Services\QiNiuApi;

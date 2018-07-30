@@ -7,6 +7,8 @@
 
 ![](/public/img/2.jpeg)
 
+![](/public/img/3.png)
+
 项目启动方式：
 
 ```php
